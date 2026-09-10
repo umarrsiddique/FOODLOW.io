@@ -1,0 +1,33 @@
+FoodFlow 
+
+A full-stack food ordering system with live order tracking, voice ordering, and a JWT-secured admin dashboard — built as a migration project from Spring Boot (Java) to a modern Express/Node.js + MongoDB stack.
+
+Live demo: add your deployed link here once it's live
+
+What it does
+Customers browse restaurants, view menus, and place orders — no account needed
+Orders are tracked live via WebSockets — status updates (e.g. "Preparing" → "Delivered") push instantly to the customer's screen with no refresh, along with a real computed ETA based on kitchen queue depth
+Voice ordering — say "add two chicken biryani" on a restaurant's menu page, or search restaurants by voice, using the browser's Web Speech API
+A single admin account (JWT-authenticated, seeded from environment config — no public signup) manages restaurants, menu items, and order status
+Tech stack
+
+Frontend: React (Vite), Tailwind CSS, Axios, Socket.io-client, Web Speech API Backend: Node.js, Express, MongoDB (Mongoose), Socket.io, JWT, bcrypt
+
+Architecture / design patterns
+
+This project deliberately preserves three classic design patterns from its original Java/Spring Boot version, re-implemented idiomatically in Node:
+
+Strategy — delivery fee calculation (standard vs express) is a swappable strategy function
+Observer — order status changes fan out to two independent listeners: one logs to the console, one broadcasts live to the browser over WebSockets. Built on Node's EventEmitter.
+Factory — order construction is centralized in a small factory function
+Facade — orderService.js hides all of the above behind two simple methods (placeOrder, updateOrderStatus)
+Project structure
+foodflow-frontend/   React app (Vite) - see its own README for setup
+foodflow-backend/    Express API + MongoDB - see its own README for setup
+
+Each subfolder has its own README.md with detailed setup instructions (environment variables, seeding the database, running locally).
+
+Running locally
+Set up foodflow-backend first (see foodflow-backend/README.md) — needs a MongoDB connection (local or Atlas free tier), then npm install, configure .env, npm run seed, npm run dev
+Set up foodflow-frontend (see foodflow-frontend/README.md) — npm install, npm run dev
+Open http://localhost:5173
