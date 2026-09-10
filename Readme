@@ -1,6 +1,6 @@
 FoodFlow 
 
-A full-stack food ordering system with live order tracking, voice ordering, and a JWT-secured admin dashboard — built as a migration project from Spring Boot (Java) to a modern Express/Node.js + MongoDB stack.
+A full-stack food ordering system with live order tracking, voice ordering, and a JWT-secured admin dashboard — modern Express/Node.js + MongoDB stack.
 
 Live demo: add your deployed link here once it's live
 

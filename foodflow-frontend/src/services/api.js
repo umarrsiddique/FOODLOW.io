@@ -1,7 +1,9 @@
 import axios from 'axios'
 
+// Falls back to localhost for local development; set VITE_API_URL in your
+// deployment environment (e.g. Vercel/Netlify) to point at your real backend.
 const API = axios.create({
-  baseURL: 'http://localhost:8080/api'
+  baseURL: `${import.meta.env.VITE_API_URL || 'http://localhost:8080'}/api`
 })
 
 // Attaches the admin JWT (if present) to every outgoing request.

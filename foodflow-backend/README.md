@@ -102,8 +102,8 @@ under `src/routes/`.
 
 ```
 src/
-  config/db.js          - Sequelize connection (replaces application.properties datasource)
-  models/                - Sequelize models (replaces JPA @Entity classes)
+  config/db.js          - Mongoose connection (replaces application.properties datasource)
+  models/                - Mongoose schemas (replaces JPA @Entity classes)
   repositories/          - Thin data-access wrappers (replaces JpaRepository interfaces)
   services/               - Business logic (replaces @Service classes)
   controllers/            - Request handlers (replaces @RestController classes)

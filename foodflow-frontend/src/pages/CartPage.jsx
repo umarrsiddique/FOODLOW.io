@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
-import { useOrders } from '../context/OrderContext'
 import { placeOrder } from '../services/api'
 import socket from '../services/socket'
 import barfi from '../assets/food/barfi.jpg'
@@ -58,7 +57,6 @@ const foodImageMap = {
 
 function CartPage() {
   const { cartItems, updateQuantity, removeFromCart, clearCart, totalPrice } = useCart()
-  const { addOrder } = useOrders()
   const navigate = useNavigate()
   const [ordered, setOrdered] = useState(false)
   const [placedOrder, setPlacedOrder] = useState(null)
@@ -110,14 +108,6 @@ function CartPage() {
       const savedIds = JSON.parse(localStorage.getItem('myOrderIds') || '[]')
       localStorage.setItem('myOrderIds', JSON.stringify([...savedIds, savedOrder.id]))
 
-      addOrder({
-        id: `#${savedOrder.id}`,
-        restaurant: cartItems[0].restaurantName || 'Restaurant',
-        items: orderData.items,
-        total: totalPrice + savedOrder.deliveryFee,
-        status: savedOrder.status,
-        date: 'Just now',
-      })
       clearCart()
       setPlacedOrder(savedOrder)
       setOrdered(true)
